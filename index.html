@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Artist Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      transition: background 2s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      background-color: black; /* Set initial background color */
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="quiz-container">
+    <img id="artist-image" src="" alt="Music Artist">
+    <div id="question-text"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Queen_%28Montreal%29.jpg',
+        question: 'Who is this rock artist?',
+        answer: 'Queen'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Beatles_ad_1965_%28reduced%29.jpg/800px-Beatles_ad_1965_%28reduced%29.jpg',
+        question: 'Who is this rock artist?',
+        answer: 'The Beatles'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Michael_Jackson_in_1988.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Michael Jackson'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Madonna_by_David_Shankbone.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Madonna'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Elvis_Presley_by_Alfred_Wertheimer.jpg',
+        question: 'Who is this rock artist?',
+        answer: 'Elvis Presley'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Freddie_Mercury_in_New_Haven%2C_1978.jpg/627px-Freddie_Mercury_in_New_Haven%2C_1978.jpg',
+        question: 'Who is this rock artist?',
+        answer: 'Freddie Mercury'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Ariana_Grande_%28Billboard_Music_Awards_2019%29_%28cropped%29.jpg/800px-Ariana_Grande_%28Billboard_Music_Awards_2019%29_%28cropped%29.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Ariana Grande'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Billie_Eilish_by_Alice_Hahn.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Billie Eilish'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Tame_Impala_2015.jpg',
+        question: 'Who is this indie artist?',
+        answer: 'Tame Impala'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Arctic_Monkeys_-_Ilosaarirock_2014.jpg',
+        question: 'Who is this indie artist?',
+        answer: 'Arctic Monkeys'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Beyonce%2C_Global_Citizen_Festival_SA_2018.jpg',
+        question: 'Who is this R&B artist?',
+        answer: 'Beyoncé'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Drake_at_the_Velvet_Underground_%28cropped%29.jpg/660px-Drake_at_the_Velvet_Underground_%28cropped%29.jpg',
+        question: 'Who is this hip-hop artist?',
+        answer: 'Drake'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Kendrick_Lamar_-_Openair_Frauenfeld_2019_01.jpg',
+        question: 'Who is this rap artist?',
+        answer: 'Kendrick Lamar'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Ed_Sheeran_at_Heinz_Field_%28cropped%29.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Ed Sheeran'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Avicii_2014.jpg',
+        question: 'Who is this EDM artist?',
+        answer: 'Avicii'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Anderson_Paak_and_the_Free_Nationals_Lollapalooza_2018_%28cropped%29.jpg/617px-Anderson_Paak_and_the_Free_Nationals_Lollapalooza_2018_%28cropped%29.jpg',
+        question: 'Who is this R&B artist?',
+        answer: 'Anderson .Paak'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Florence_and_the_Machine_2018.jpg/570px-Florence_and_the_Machine_2018.jpg',
+        question: 'Who is this indie artist?',
+        answer: 'Florence + The Machine'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Jay-Z_2011.jpg',
+        question: 'Who is this hip-hop artist?',
+        answer: 'Jay-Z'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Imagine_Dragons_2012.jpg/563px-Imagine_Dragons_2012.jpg',
+        question: 'Who is this rock artist?',
+        answer: 'Imagine Dragons'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Pharrell_Williams_at_Paris_%28cropped%29.jpg',
+        question: 'Who is this R&B artist?',
+        answer: 'Pharrell Williams'
+      },
+      {
+        artist: 'https://upload.wikimedia.org/wikipedia/commons/9/94/Sia_2015_%28cropped%29.jpg',
+        question: 'Who is this pop artist?',
+        answer: 'Sia'
+      },
+      // Add more quiz data as needed
+    ];
+
+    let currentQuizIndex = 0;
+
+    const displayQuiz = () => {
+      const quizContainer = document.getElementById('quiz-container');
+      const artistImage = document.getElementById('artist-image');
+      const questionText = document.getElementById('question-text');
+
+      const currentQuiz = quizData[currentQuizIndex];
+
+      artistImage.src = currentQuiz.artist;
+      questionText.textContent = currentQuiz.question;
+
+      setTimeout(() => {
+        questionText.textContent = currentQuiz.answer;
+
+        setTimeout(() => {
+          quizContainer.style.backgroundImage = 'none';
+          quizContainer.style.backgroundColor = 'black';
+
+          setTimeout(() => {
+            nextQuiz();
+          }, 2000);
+        }, 10000);
+      }, 10000);
+    };
+
+    const nextQuiz = () => {
+      currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+      displayQuiz();
+    };
+
+    // Display the first quiz when the page loads
+    displayQuiz();
+  </script>
+</body>
+</html>
+
