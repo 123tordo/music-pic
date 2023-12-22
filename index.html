@@ -68,9 +68,10 @@
       },
     ];
 
-    let currentQuizIndex = Math.floor(Math.random() * quizData.length);
+    let currentQuizIndex;
 
     const displayQuiz = () => {
+      currentQuizIndex = Math.floor(Math.random() * quizData.length);
       const quizContainer = document.getElementById('quiz-container');
       const artistImage = document.getElementById('artist-image');
       const questionText = document.getElementById('question-text');
@@ -95,7 +96,6 @@
     };
 
     const nextQuiz = () => {
-      currentQuizIndex = Math.floor(Math.random() * quizData.length);
       displayQuiz();
     };
 
