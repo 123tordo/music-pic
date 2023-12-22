@@ -66,10 +66,9 @@
         question: 'Who is this pop artist?',
         answer: 'Billie Eilish'
       },
-      // Add more quiz data as needed
     ];
 
-    let currentQuizIndex = 0;
+    let currentQuizIndex = Math.floor(Math.random() * quizData.length);
 
     const displayQuiz = () => {
       const quizContainer = document.getElementById('quiz-container');
@@ -96,7 +95,7 @@
     };
 
     const nextQuiz = () => {
-      currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+      currentQuizIndex = Math.floor(Math.random() * quizData.length);
       displayQuiz();
     };
 
@@ -105,4 +104,3 @@
   </script>
 </body>
 </html>
-
